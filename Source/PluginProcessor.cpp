@@ -149,9 +149,11 @@ void VibeeAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
         updateDSP();
     }
 
-    float* outputBuffers[2] = { nullptr, nullptr };
-    outputBuffers[0] = buffer.getWritePointer(0);
-    if (totalNumOutputChannels > 1) outputBuffers[1] = buffer.getWritePointer(1);
+    vibrato.processBlock(
+        buffer.getArrayOfWritePointers(),
+        buffer.getNumChannels(),
+        buffer.getNumSamples()
+    );
 
 }
 

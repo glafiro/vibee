@@ -12,6 +12,23 @@ inline static void castParameter(AudioProcessorValueTreeState& apvts,
     // parameter does not exist or wrong type
 }
 
+inline unsigned int nearestPowerOfTwo(int n) {
+    return pow(2, ceil(log(n) / log(2)));
+}
+
+template<typename T>
+inline T lerp(T a, T b, T t) {
+    return a + t * (b - a);
+}
+
+template<typename T>
+inline T limit(T val, T min, T max) {
+    if (val > max) return max;
+    if (val < min) return min;
+    return val;
+}
+
+
 inline float linearToDb(float input) {
     return 20.0f * log10f(fabsf(input) + 0.000001f);
 }
@@ -29,4 +46,9 @@ inline float sign(float x) {
 inline float fastatan(float x)
 {
     return (x / (1.0f + 0.28f * (x * x)));
+}
+
+template<typename T>
+T lengthToSamples(T sr, T n) noexcept {
+    return sr * n * static_cast<T>(0.001);
 }

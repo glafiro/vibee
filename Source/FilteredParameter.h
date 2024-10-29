@@ -6,12 +6,6 @@
 #define M_PI 3.14159265358979323846
 #include <cmath>
 
-// Utility functions
-template<typename T>
-T lengthToSamples(T sr, T n) noexcept {
-    return sr * n * static_cast<T>(0.001);
-}
-
 class OnePoleFilter
 {
 public:
