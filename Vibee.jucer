@@ -7,6 +7,20 @@
               pluginAAXCategory="0,32" lv2Uri="https://github.com/glafiro/vibee">
   <MAINGROUP id="GXU8IE" name="Vibee">
     <GROUP id="{9941F2E3-A08E-59E7-2F50-CD7C06CD334F}" name="Source">
+      <FILE id="xqhSMP" name="Utils.h" compile="0" resource="0" file="Source/Utils.h"/>
+      <FILE id="oKtZwJ" name="PresetManager.h" compile="0" resource="0" file="Source/PresetManager.h"/>
+      <FILE id="TA73Xl" name="Vibrato.cpp" compile="1" resource="0" file="Source/Vibrato.cpp"/>
+      <FILE id="Bufaag" name="Vibrato.h" compile="0" resource="0" file="Source/Vibrato.h"/>
+      <FILE id="uwnyHr" name="LookAndFeel.cpp" compile="1" resource="0" file="Source/LookAndFeel.cpp"/>
+      <FILE id="aCBQl4" name="LookAndFeel.h" compile="0" resource="0" file="Source/LookAndFeel.h"/>
+      <FILE id="fTNRFK" name="GuiComponents.cpp" compile="1" resource="0"
+            file="Source/GuiComponents.cpp"/>
+      <FILE id="LZKiCX" name="GuiComponents.h" compile="0" resource="0" file="Source/GuiComponents.h"/>
+      <FILE id="jVh7vH" name="FilteredParameter.h" compile="0" resource="0"
+            file="Source/FilteredParameter.h"/>
+      <FILE id="ASAvm7" name="DSPParameters.h" compile="0" resource="0" file="Source/DSPParameters.h"/>
+      <FILE id="lMd5Kx" name="APVTSParameter.h" compile="0" resource="0"
+            file="Source/APVTSParameter.h"/>
       <FILE id="foyAM1" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="I1KvVF" name="PluginProcessor.h" compile="0" resource="0"
@@ -55,7 +69,7 @@
         <MODULEPATH id="juce_opengl" path="../../../Libs/JUCE/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
-    <VS2022 targetFolder="Builds/VisualStudio2022">
+    <VS2022 targetFolder="Builds/VisualStudio2022" extraDefs="PRESET_FOLDER=juce::File::SpecialLocationType::commonDocumentsDirectory">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="Vibee" enablePluginBinaryCopyStep="1"
                        vst3BinaryLocation="C:\Users\dglaf\Documents\VSTPlugins"/>

@@ -10,18 +10,26 @@ VibeeAudioProcessor::VibeeAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ),
+    apvts(*this, nullptr, "Parameters", createParameterLayout()),
+    vibrato()
 #endif
 {
+    apvts.state.addListener(this);
+
+    for (auto& param : apvtsParameters) {
+        param->castParameter(apvts);
+    }
 }
 
 VibeeAudioProcessor::~VibeeAudioProcessor()
 {
+    apvts.state.removeListener(this);
 }
 
 const juce::String VibeeAudioProcessor::getName() const
 {
-    return JucePlugin_Name;
+    return "Vibee";
 }
 
 bool VibeeAudioProcessor::acceptsMidi() const
@@ -81,6 +89,26 @@ void VibeeAudioProcessor::changeProgramName (int index, const juce::String& newN
 
 void VibeeAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+    int nChannels = getTotalNumInputChannels();
+
+    vibratoParameters.set("sampleRate", sampleRate);
+    vibratoParameters.set("blockSize", samplesPerBlock);
+    vibratoParameters.set("nChannels", nChannels);
+
+    for (auto& param : apvtsParameters) {
+        vibratoParameters.set(param->id.getParamID().toStdString(), param->getDefault());
+    }
+
+    vibrato.prepare(vibratoParameters);
+}
+
+void VibeeAudioProcessor::updateDSP()
+{
+    for (auto& param : apvtsParameters) {
+        vibratoParameters.set(param->id.getParamID().toStdString(), param->get());
+    }
+
+    vibrato.update(vibratoParameters);
 }
 
 void VibeeAudioProcessor::releaseResources()
@@ -114,6 +142,17 @@ void VibeeAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
+
+    bool expected = true;
+
+    if (isNonRealtime() || parametersChanged.compare_exchange_strong(expected, false)) {
+        updateDSP();
+    }
+
+    float* outputBuffers[2] = { nullptr, nullptr };
+    outputBuffers[0] = buffer.getWritePointer(0);
+    if (totalNumOutputChannels > 1) outputBuffers[1] = buffer.getWritePointer(1);
+
 }
 
 bool VibeeAudioProcessor::hasEditor() const
@@ -123,7 +162,8 @@ bool VibeeAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* VibeeAudioProcessor::createEditor()
 {
-    return new VibeeAudioProcessorEditor (*this);
+    return new GenericAudioProcessorEditor(*this);
+    //return new VibeeAudioProcessorEditor (*this);
 }
 
 void VibeeAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
@@ -137,4 +177,52 @@ void VibeeAudioProcessor::setStateInformation (const void* data, int sizeInBytes
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new VibeeAudioProcessor();
+}
+
+AudioProcessorValueTreeState::ParameterLayout VibeeAudioProcessor::createParameterLayout()
+{
+    AudioProcessorValueTreeState::ParameterLayout layout;
+
+    layout.add(std::make_unique <AudioParameterFloat>(
+        apvtsParameters[ParameterNames::VIB_RATE]->id,
+        apvtsParameters[ParameterNames::VIB_RATE]->displayValue,
+        NormalisableRange<float>{ 0.0f, 1.0f, 0.01f },
+        apvtsParameters[ParameterNames::VIB_RATE]->getDefault()
+    ));
+    
+    layout.add(std::make_unique <AudioParameterFloat>(
+        apvtsParameters[ParameterNames::VIB_DEPTH]->id,
+        apvtsParameters[ParameterNames::VIB_DEPTH]->displayValue,
+        NormalisableRange<float>{ 0.0f, 100.0f, 0.01f },
+        apvtsParameters[ParameterNames::VIB_DEPTH]->getDefault()
+    ));
+    
+    layout.add(std::make_unique <AudioParameterFloat>(
+        apvtsParameters[ParameterNames::FM_RATE]->id,
+        apvtsParameters[ParameterNames::FM_RATE]->displayValue,
+        NormalisableRange<float>{ 0.0f, 1.0f, 0.01f },
+        apvtsParameters[ParameterNames::FM_RATE]->getDefault()
+    ));
+    
+    layout.add(std::make_unique <AudioParameterFloat>(
+        apvtsParameters[ParameterNames::FM_DEPTH]->id,
+        apvtsParameters[ParameterNames::FM_DEPTH]->displayValue,
+        NormalisableRange<float>{ 0.0f, 100.0f, 0.01f },
+        apvtsParameters[ParameterNames::FM_DEPTH]->getDefault()
+    ));
+    
+    layout.add(std::make_unique <AudioParameterFloat>(
+        apvtsParameters[ParameterNames::MIX]->id,
+        apvtsParameters[ParameterNames::MIX]->displayValue,
+        NormalisableRange<float>{ 0.0f, 100.0f, 0.01f },
+        apvtsParameters[ParameterNames::MIX]->getDefault()
+    ));
+    
+    layout.add(std::make_unique <AudioParameterBool>(
+        apvtsParameters[ParameterNames::IS_ON]->id,
+        apvtsParameters[ParameterNames::IS_ON]->displayValue,
+        apvtsParameters[ParameterNames::IS_ON]->getDefault()
+    ));
+
+    return layout;
 }

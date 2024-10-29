@@ -2,7 +2,33 @@
 
 #include <JuceHeader.h>
 
-class VibeeAudioProcessor  : public juce::AudioProcessor
+#include <array>
+using std::array;
+
+#include "DSPParameters.h"
+#include "APVTSParameter.h"
+#include "Vibrato.h"
+
+enum ParameterNames {
+    VIB_RATE, VIB_DEPTH,
+    FM_RATE, FM_DEPTH,
+    MIX, IS_ON,
+    PARAM_COUNT
+};
+
+static std::array<std::unique_ptr<IAPVTSParameter>, ParameterNames::PARAM_COUNT> apvtsParameters{
+    std::make_unique<APVTSParameterFloat>("vibRate",  "VIB. RATE",  0.0f),
+    std::make_unique<APVTSParameterFloat>("vibDepth", "VIB. DEPTH", 0.0f),
+    std::make_unique<APVTSParameterFloat>("fmRate",   "FM RATE",    0.0f),
+    std::make_unique<APVTSParameterFloat>("fmDepth",  "FM DEPTH",   0.0f),
+    std::make_unique<APVTSParameterFloat>("mix",      "MIX",        100.0f),
+    std::make_unique<APVTSParameterBool> ("isOn",     "On",         true)
+};
+
+
+class VibeeAudioProcessor  : 
+    public juce::AudioProcessor,
+    public ValueTree::Listener
 {
 public:
     VibeeAudioProcessor();
@@ -36,6 +62,21 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    AudioProcessorValueTreeState     apvts;
+
 private:
+    AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+
+    // Manage parameter changes in a thread-safe way
+    std::atomic<bool> parametersChanged{ false };
+    void valueTreePropertyChanged(ValueTree&, const Identifier&) override {
+        parametersChanged.store(true);
+    }
+
+    DSPParameters<float> vibratoParameters;
+    void updateDSP();
+
+    Vibrato vibrato;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (VibeeAudioProcessor)
 };
