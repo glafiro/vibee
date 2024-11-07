@@ -30,7 +30,6 @@ void Vibrato::update(DSPParameters<float>& params) {
 
 	filterL.setCutoff(cutoffParam.read());
 	filterR.setCutoff(cutoffParam.read());
-
 }
 
 void Vibrato::processBlock(float* const* inputBuffer, int numChannels, int numSamples) {
@@ -39,10 +38,10 @@ void Vibrato::processBlock(float* const* inputBuffer, int numChannels, int numSa
 		auto sampleL = inputBuffer[0][s];
 		auto sampleR = inputBuffer[1][s];
 
-		float vibRate = 0.85f * pow(vibRateParam.next(), 6.0f) * 0.02f;
-		float vibDepth = (pow(vibDepthParam.next(), 3)) * 400.0;
+		float vibRate = pow(vibRateParam.next() * 0.85f, 6.0f) * 0.02f;
+		float vibDepth = (pow(vibDepthParam.next(), 3)) * sampleRate * 0.01f;
 		float fmRate = pow(0.1 + fmRateParam.next(), 8) * 0.2f;
-		float fmDepth = pow(fmDepthParam.next(), 3);
+		float fmDepth = pow(fmDepthParam.next() * 0.6f, 3);
 
 		ringBuffers[0].write(sampleL);
 		ringBuffers[1].write(sampleR);
