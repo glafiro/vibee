@@ -12,7 +12,8 @@ using std::array;
 enum ParameterNames {
     VIB_RATE, VIB_DEPTH,
     FM_RATE, FM_DEPTH,
-    MIX, IS_ON,
+    MIX,
+    CUTOFF,
     PARAM_COUNT
 };
 
@@ -22,7 +23,7 @@ static std::array<std::unique_ptr<IAPVTSParameter>, ParameterNames::PARAM_COUNT>
     std::make_unique<APVTSParameterFloat>("fmRate",   "FM RATE",    0.0f),
     std::make_unique<APVTSParameterFloat>("fmDepth",  "FM DEPTH",   0.0f),
     std::make_unique<APVTSParameterFloat>("mix",      "MIX",        100.0f),
-    std::make_unique<APVTSParameterBool> ("isOn",     "On",         true)
+    std::make_unique<APVTSParameterFloat>("cutoff",   "LP Filter",  20000.0f)
 };
 
 

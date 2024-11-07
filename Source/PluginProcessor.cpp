@@ -220,11 +220,13 @@ AudioProcessorValueTreeState::ParameterLayout VibeeAudioProcessor::createParamet
         apvtsParameters[ParameterNames::MIX]->getDefault()
     ));
     
-    layout.add(std::make_unique <AudioParameterBool>(
-        apvtsParameters[ParameterNames::IS_ON]->id,
-        apvtsParameters[ParameterNames::IS_ON]->displayValue,
-        apvtsParameters[ParameterNames::IS_ON]->getDefault()
+    layout.add(std::make_unique <AudioParameterFloat>(
+        apvtsParameters[ParameterNames::CUTOFF]->id,
+        apvtsParameters[ParameterNames::CUTOFF]->displayValue,
+        NormalisableRange<float>{ 20.0f, 20000.0f, 0.01f, 0.2f },
+        apvtsParameters[ParameterNames::CUTOFF]->getDefault()
     ));
+
 
     return layout;
 }

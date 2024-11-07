@@ -11,8 +11,13 @@ void Vibrato::prepare(DSPParameters<float>& params) {
 	fmRateParam.prepare(sampleRate);
 	fmDepthParam.prepare(sampleRate);
 	mix.prepare(sampleRate);
+	cutoffParam.prepare(sampleRate);
 	
+	filterL.prepare(sampleRate);
+	filterR.prepare(sampleRate);
+
 	update(params);
+
 }
 
 void Vibrato::update(DSPParameters<float>& params) {
@@ -21,7 +26,11 @@ void Vibrato::update(DSPParameters<float>& params) {
 	fmRateParam.update(params["fmRate"]);
 	fmDepthParam.update(params["fmDepth"] * 0.01f);
 	mix.update(params["mix"] * 0.01f);
-	isOn = params["isOn"];
+	cutoffParam.update(params["cutoff"]);
+
+	filterL.setCutoff(cutoffParam.read());
+	filterR.setCutoff(cutoffParam.read());
+
 }
 
 void Vibrato::processBlock(float* const* inputBuffer, int numChannels, int numSamples) {
@@ -50,6 +59,14 @@ void Vibrato::processBlock(float* const* inputBuffer, int numChannels, int numSa
 		if (fmPhase > TWO_PI) { fmPhase -= TWO_PI; }
 
 		auto wet = mix.next();
+
+		float cutoff = cutoffParam.next();
+
+		filterL.setCutoff(cutoff);
+		delayReadL = filterL.process(delayReadL);
+		filterR.setCutoff(cutoff);
+		delayReadR = filterR.process(delayReadR);
+
 		inputBuffer[0][s] = sampleL * (1.0f - wet) + delayReadL * wet;
 		inputBuffer[1][s] = sampleR * (1.0f - wet) + delayReadR * wet;
 	}

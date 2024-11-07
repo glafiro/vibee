@@ -17,7 +17,7 @@
             xcodeResource="1"/>
     </GROUP>
     <GROUP id="{9941F2E3-A08E-59E7-2F50-CD7C06CD334F}" name="Source">
-      <FILE id="o4zhms" name="LadderFilter.h" compile="0" resource="0" file="Source/LadderFilter.h"/>
+      <FILE id="o4zhms" name="LPFilter.h" compile="0" resource="0" file="Source/LPFilter.h"/>
       <FILE id="EAnseM" name="LFO.h" compile="0" resource="0" file="Source/LFO.h"/>
       <FILE id="xqhSMP" name="Utils.h" compile="0" resource="0" file="Source/Utils.h"/>
       <FILE id="oKtZwJ" name="PresetManager.h" compile="0" resource="0" file="Source/PresetManager.h"/>

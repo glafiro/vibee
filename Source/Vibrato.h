@@ -6,6 +6,7 @@
 #include "Utils.h"
 #include "DSPParameters.h"
 #include "FilteredParameter.h"
+#include "LPFilter.h"
 
 #define DEFAULT_SR 44100.0f
 #define DEFAULT_BUFFER_SIZE 1
@@ -79,7 +80,7 @@ class Vibrato
 	FilteredParameter fmRateParam{};
 	FilteredParameter fmDepthParam{};
 	FilteredParameter mix{};
-	bool isOn{ true };
+	FilteredParameter cutoffParam{};
 
     float vibPhase{};
     float fmPhase{};
@@ -93,11 +94,11 @@ class Vibrato
         RingBuffer<float>(lengthToSamples(sampleRate, MAX_DELAY_LENGTH))
     };
 
+    LPFilter filterL, filterR;
+
 public:
 
 	void prepare(DSPParameters<float>& params);
 	void update(DSPParameters<float>& params);
 	void processBlock(float* const* inputBuffer, int numChannels, int numSamples);
-	//float processSample(float sample);
-
 };
