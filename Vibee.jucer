@@ -7,16 +7,17 @@
               pluginAAXCategory="0,32" lv2Uri="https://github.com/glafiro/vibee">
   <MAINGROUP id="GXU8IE" name="Vibee">
     <GROUP id="{427118A5-E5B2-9AD4-A983-CB4A74D6B7E6}" name="Resources">
-      <FILE id="c20UOL" name="BASE.png" compile="0" resource="1" file="Resources/BASE.png"
+      <FILE id="AhQEyP" name="base.png" compile="0" resource="1" file="Resources/base.png"
             xcodeResource="1"/>
       <FILE id="c4PDnU" name="coolvetica.otf" compile="0" resource="1" file="Resources/coolvetica.otf"
             xcodeResource="1"/>
-      <FILE id="dW5xvJ" name="SHADOWS.png" compile="0" resource="1" file="Resources/SHADOWS.png"
+      <FILE id="Bz23Uh" name="shadows.png" compile="0" resource="1" file="Resources/shadows.png"
             xcodeResource="1"/>
-      <FILE id="JAlvu2" name="spritesheet.png" compile="0" resource="1" file="Resources/spritesheet.png"
+      <FILE id="zJt6TD" name="spritesheet.png" compile="0" resource="1" file="Resources/spritesheet.png"
             xcodeResource="1"/>
     </GROUP>
     <GROUP id="{9941F2E3-A08E-59E7-2F50-CD7C06CD334F}" name="Source">
+      <FILE id="o4zhms" name="LadderFilter.h" compile="0" resource="0" file="Source/LadderFilter.h"/>
       <FILE id="EAnseM" name="LFO.h" compile="0" resource="0" file="Source/LFO.h"/>
       <FILE id="xqhSMP" name="Utils.h" compile="0" resource="0" file="Source/Utils.h"/>
       <FILE id="oKtZwJ" name="PresetManager.h" compile="0" resource="0" file="Source/PresetManager.h"/>

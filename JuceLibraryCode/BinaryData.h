@@ -8,17 +8,17 @@
 
 namespace BinaryData
 {
-    extern const char*   BASE_png;
-    const int            BASE_pngSize = 2938045;
+    extern const char*   base_png;
+    const int            base_pngSize = 2906690;
 
     extern const char*   coolvetica_otf;
     const int            coolvetica_otfSize = 70876;
 
-    extern const char*   SHADOWS_png;
-    const int            SHADOWS_pngSize = 1680468;
+    extern const char*   shadows_png;
+    const int            shadows_pngSize = 1722079;
 
     extern const char*   spritesheet_png;
-    const int            spritesheet_pngSize = 8394295;
+    const int            spritesheet_pngSize = 8435998;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
     const int namedResourceListSize = 4;

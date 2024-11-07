@@ -30,23 +30,13 @@ void Vibrato::processBlock(float* const* inputBuffer, int numChannels, int numSa
 		auto sampleL = inputBuffer[0][s];
 		auto sampleR = inputBuffer[1][s];
 
-		float vibRate = pow(vibRateParam.next(), 6.0f) * 0.02f;
+		float vibRate = 0.85f * pow(vibRateParam.next(), 6.0f) * 0.02f;
 		float vibDepth = (pow(vibDepthParam.next(), 3)) * 400.0;
-		float fmRate = pow(0.1 + fmRateParam.next(), 6);
-		float fmDepth = pow(fmDepthParam.next(), 3) * 400.0f;
+		float fmRate = pow(0.1 + fmRateParam.next(), 8) * 0.2f;
+		float fmDepth = pow(fmDepthParam.next(), 3);
 
 		ringBuffers[0].write(sampleL);
 		ringBuffers[1].write(sampleR);
-
-		// rfa
-		// rfa
-		// rfa
-		// rfa
-		// rfa
-		// rfa
-		// rfa
-		// rfa
-		// rfa
 
 		float offset = vibDepth + (vibDepth * sin(vibPhase));
 		float delayReadL = ringBuffers[0].read(offset);
