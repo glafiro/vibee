@@ -70,6 +70,7 @@ public:
 class Vibrato
 {
 	float sampleRate{ DEFAULT_SR };
+    float invSampleRate{ 1.0f / DEFAULT_SR };
 	int blockSize{ 0 };
 	float nChannels{ 2.0f };
 
@@ -80,8 +81,8 @@ class Vibrato
 	FilteredParameter mix{};
 	bool isOn{ true };
 
-    float vibPhase{ 0.0f };
-    float fmPhase { 0.0f };
+    float vibPhase{};
+    float fmPhase{};
 
     RingBuffer<float> ringBufferL {
         static_cast<int>((lengthToSamples(sampleRate, MAX_DELAY_LENGTH)))

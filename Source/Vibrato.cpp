@@ -2,6 +2,7 @@
 
 void Vibrato::prepare(DSPParameters<float>& params) {
 	sampleRate = params["sampleRate"];
+	invSampleRate = 1.0f / sampleRate;
 	blockSize = params["blockSize"];
 	nChannels = params["nChannels"];
 
@@ -29,18 +30,28 @@ void Vibrato::processBlock(float* const* inputBuffer, int numChannels, int numSa
 		auto sampleL = inputBuffer[0][s];
 		auto sampleR = inputBuffer[1][s];
 
-		float vibRate  = pow(0.1 + vibRateParam.next(), 6.0f);
-		float vibDepth = (pow(vibDepthParam.next(), 3) / sqrt(vibRate)) * 4.0;
-		float fmRate   = pow(0.1 + fmRateParam.next(), 6);
-		float fmDepth  = pow(fmDepthParam.next(), 3) / sqrt(fmRate);
-			
+		float vibRate = pow(vibRateParam.next(), 6.0f) * 0.02f;
+		float vibDepth = (pow(vibDepthParam.next(), 3)) * 400.0;
+		float fmRate = pow(0.1 + fmRateParam.next(), 6);
+		float fmDepth = pow(fmDepthParam.next(), 3) * 400.0f;
+
 		ringBuffers[0].write(sampleL);
 		ringBuffers[1].write(sampleR);
+
+		// rfa
+		// rfa
+		// rfa
+		// rfa
+		// rfa
+		// rfa
+		// rfa
+		// rfa
+		// rfa
 
 		float offset = vibDepth + (vibDepth * sin(vibPhase));
 		float delayReadL = ringBuffers[0].read(offset);
 		float delayReadR = ringBuffers[1].read(offset);
-			
+
 		vibPhase += (vibRate + (fmRate * sin(fmPhase) * fmDepth));
 		fmPhase += fmRate;
 
@@ -52,6 +63,4 @@ void Vibrato::processBlock(float* const* inputBuffer, int numChannels, int numSa
 		inputBuffer[0][s] = sampleL * (1.0f - wet) + delayReadL * wet;
 		inputBuffer[1][s] = sampleR * (1.0f - wet) + delayReadR * wet;
 	}
-
-
 }
