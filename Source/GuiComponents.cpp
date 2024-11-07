@@ -1,11 +1,41 @@
-/*
-  ==============================================================================
-
-    GuiComponents.cpp
-    Created: 29 Oct 2024 1:27:29pm
-    Author:  dglaf
-
-  ==============================================================================
-*/
-
 #include "GuiComponents.h"
+
+
+Knob::Knob(IAPVTSParameter* param, int w, int h, AudioProcessorValueTreeState& apvts, Image& img) :
+    width(w), height(h), state(apvts), sheet(img)
+{
+    slider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
+    slider.setTextBoxStyle(Slider::NoTextBox, false, w, h * 0.186);
+    slider.setBounds(0, 0, w, h);
+    addAndMakeVisible(slider);
+
+    label.setText(param->displayValue, NotificationType::dontSendNotification);
+    label.setJustificationType(Justification::horizontallyCentred);
+    label.setBorderSize(BorderSize<int>(0));
+    label.attachToComponent(&slider, false);
+    addAndMakeVisible(label);
+
+    // Attach GUI component to AudioProcessorValueTreeState
+    attachment = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(
+        state, param->id.getParamID(), slider
+    );
+}
+
+Knob::~Knob() {}
+
+void Knob::resized() {
+    slider.setBounds(getLocalBounds().withHeight(getLocalBounds().getWidth()));
+}
+
+void Knob::paint(Graphics& g) {
+    auto bounds = getLocalBounds();
+    auto targetArea = bounds.withHeight(bounds.getWidth())
+        .reduced(bounds.getWidth() * 0.2f);
+
+    auto spriteSize = sheet.getHeight();
+    int idx = slider.getNormalisableRange().convertTo0to1(slider.getValue()) * 126;
+    Rectangle<int> imgBounds(0 + idx * spriteSize, 0, spriteSize, spriteSize);
+    
+    Image clippedImage = sheet.getClippedImage(imgBounds);
+    g.drawImage(clippedImage, targetArea.toFloat());
+}

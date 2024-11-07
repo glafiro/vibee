@@ -15,7 +15,7 @@ namespace BinaryData
     const int            coolvetica_otfSize = 70876;
 
     extern const char*   shadows_png;
-    const int            shadows_pngSize = 1722079;
+    const int            shadows_pngSize = 562162;
 
     extern const char*   spritesheet_png;
     const int            spritesheet_pngSize = 8435998;

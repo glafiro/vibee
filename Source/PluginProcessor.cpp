@@ -164,8 +164,8 @@ bool VibeeAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* VibeeAudioProcessor::createEditor()
 {
-    return new GenericAudioProcessorEditor(*this);
-    //return new VibeeAudioProcessorEditor (*this);
+    //return new GenericAudioProcessorEditor(*this);
+    return new VibeeAudioProcessorEditor (*this);
 }
 
 void VibeeAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
