@@ -29,7 +29,7 @@ public:
 
     void drawLabel(Graphics& g, Label& l) override {
         auto bounds = l.getLocalBounds();
-        auto fontSize = bounds.getHeight() * 0.9f;
+        auto fontSize = bounds.getHeight() * 0.8f;
         g.setColour(Colors::cream);
         g.setFont(labelFont.withHeight(fontSize));
         g.drawText(l.getText(), bounds, Justification::centred, false);
