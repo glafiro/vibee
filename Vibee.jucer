@@ -60,7 +60,7 @@
   </MODULES>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
   <EXPORTFORMATS>
-    <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile" extraDefs="PRESET_FOLDER=juce::File::SpecialLocationType::commonApplicationDataDirectory">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="Vibee"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="Vibee"/>
@@ -104,7 +104,8 @@
         <MODULEPATH id="juce_opengl" path="../../../Libs/JUCE/modules"/>
       </MODULEPATHS>
     </VS2022>
-    <XCODE_MAC targetFolder="Builds/MacOSX">
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraDefs="PRESET_FOLDER=juce::File::SpecialLocationType::commonDocumentsDirectory"
+               iosDevelopmentTeamID="NU5TD45A54">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="Vibee"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="Vibee"/>

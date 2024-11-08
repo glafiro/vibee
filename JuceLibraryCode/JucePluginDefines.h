@@ -155,7 +155,7 @@
  #define JucePlugin_ARAFactoryID           "com.RedgooseAudio.Vibee.factory"
 #endif
 #ifndef  JucePlugin_ARADocumentArchiveID
- #define JucePlugin_ARADocumentArchiveID   "com.RedgooseAudio.Vibee.aradocumentarchive.0.0.1"
+ #define JucePlugin_ARADocumentArchiveID   "com.RedgooseAudio.Vibee.aradocumentarchive.0.1.0"
 #endif
 #ifndef  JucePlugin_ARACompatibleArchiveIDs
  #define JucePlugin_ARACompatibleArchiveIDs  ""
