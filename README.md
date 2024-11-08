@@ -34,3 +34,8 @@ Techno loop - **Dirty**
 
 https://github.com/user-attachments/assets/18bd5e10-fcb7-4a2b-ab16-44c1348ff817
 
+---
+
+## License
+
+`vibee` is [GPLv3 licensed](https://github.com/glafiro/vibee/blob/main/LICENSE).
