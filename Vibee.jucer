@@ -2,9 +2,10 @@
 
 <JUCERPROJECT id="cojWp0" name="Vibee" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="1" jucerFormatVersion="1" version="0.0.1"
-              companyName="Glafo" pluginFormats="buildAU,buildLV2,buildStandalone,buildVST3"
-              pluginManufacturerCode="GLAF" pluginCode="VIBE" pluginVST3Category="Fx,Modulation"
-              pluginAAXCategory="0,32" lv2Uri="https://github.com/glafiro/vibee">
+              companyName="Redgoose Audio" pluginFormats="buildAU,buildLV2,buildStandalone,buildVST3"
+              pluginManufacturerCode="REDG" pluginCode="VIBE" pluginVST3Category="Fx,Modulation"
+              pluginAAXCategory="0,32" lv2Uri="https://github.com/glafiro/vibee"
+              companyWebsite="www.redgooseaudio.com">
   <MAINGROUP id="GXU8IE" name="Vibee">
     <GROUP id="{427118A5-E5B2-9AD4-A983-CB4A74D6B7E6}" name="Resources">
       <FILE id="AhQEyP" name="base.png" compile="0" resource="1" file="Resources/base.png"

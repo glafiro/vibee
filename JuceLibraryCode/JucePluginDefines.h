@@ -47,16 +47,16 @@
  #define JucePlugin_Desc                   "Vibee"
 #endif
 #ifndef  JucePlugin_Manufacturer
- #define JucePlugin_Manufacturer           "Glafo"
+ #define JucePlugin_Manufacturer           "Redgoose Audio"
 #endif
 #ifndef  JucePlugin_ManufacturerWebsite
- #define JucePlugin_ManufacturerWebsite    "www.Glafo.com"
+ #define JucePlugin_ManufacturerWebsite    "www.redgooseaudio.com"
 #endif
 #ifndef  JucePlugin_ManufacturerEmail
  #define JucePlugin_ManufacturerEmail      ""
 #endif
 #ifndef  JucePlugin_ManufacturerCode
- #define JucePlugin_ManufacturerCode       0x474c4146
+ #define JucePlugin_ManufacturerCode       0x52454447
 #endif
 #ifndef  JucePlugin_PluginCode
  #define JucePlugin_PluginCode             0x56494245
@@ -110,10 +110,10 @@
  #define JucePlugin_AUManufacturerCode     JucePlugin_ManufacturerCode
 #endif
 #ifndef  JucePlugin_CFBundleIdentifier
- #define JucePlugin_CFBundleIdentifier     com.Glafo.Vibee
+ #define JucePlugin_CFBundleIdentifier     com.RedgooseAudio.Vibee
 #endif
 #ifndef  JucePlugin_AAXIdentifier
- #define JucePlugin_AAXIdentifier          com.Glafo.Vibee
+ #define JucePlugin_AAXIdentifier          com.RedgooseAudio.Vibee
 #endif
 #ifndef  JucePlugin_AAXManufacturerCode
  #define JucePlugin_AAXManufacturerCode    JucePlugin_ManufacturerCode
@@ -137,7 +137,7 @@
  #define JucePlugin_IAASubType             JucePlugin_PluginCode
 #endif
 #ifndef  JucePlugin_IAAName
- #define JucePlugin_IAAName                "Glafo: Vibee"
+ #define JucePlugin_IAAName                "Redgoose Audio: Vibee"
 #endif
 #ifndef  JucePlugin_VSTNumMidiInputs
  #define JucePlugin_VSTNumMidiInputs       16
@@ -152,10 +152,10 @@
  #define JucePlugin_ARATransformationFlags  0
 #endif
 #ifndef  JucePlugin_ARAFactoryID
- #define JucePlugin_ARAFactoryID           "com.Glafo.Vibee.factory"
+ #define JucePlugin_ARAFactoryID           "com.RedgooseAudio.Vibee.factory"
 #endif
 #ifndef  JucePlugin_ARADocumentArchiveID
- #define JucePlugin_ARADocumentArchiveID   "com.Glafo.Vibee.aradocumentarchive.0.0.1"
+ #define JucePlugin_ARADocumentArchiveID   "com.RedgooseAudio.Vibee.aradocumentarchive.0.0.1"
 #endif
 #ifndef  JucePlugin_ARACompatibleArchiveIDs
  #define JucePlugin_ARACompatibleArchiveIDs  ""
