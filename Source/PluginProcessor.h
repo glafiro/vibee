@@ -18,12 +18,12 @@ enum ParameterNames {
 };
 
 static std::array<std::unique_ptr<IAPVTSParameter>, ParameterNames::PARAM_COUNT> apvtsParameters{
-    std::make_unique<APVTSParameterFloat>("vibRate",  "VIB. RATE",  0.0f),
-    std::make_unique<APVTSParameterFloat>("vibDepth", "VIB. DEPTH", 0.0f),
-    std::make_unique<APVTSParameterFloat>("fmRate",   "FM RATE",    0.0f),
-    std::make_unique<APVTSParameterFloat>("fmDepth",  "FM DEPTH",   0.0f),
-    std::make_unique<APVTSParameterFloat>("mix",      "MIX",        100.0f),
-    std::make_unique<APVTSParameterFloat>("cutoff",   "LP Filter",  20000.0f)
+    std::make_unique<APVTSParameterFloat>("vibRate",  "Rate",  0.0f),
+    std::make_unique<APVTSParameterFloat>("vibDepth", "Depth", 0.0f),
+    std::make_unique<APVTSParameterFloat>("fmRate",   "FM Rate",    0.0f),
+    std::make_unique<APVTSParameterFloat>("fmDepth",  "FM Depth",   0.0f),
+    std::make_unique<APVTSParameterFloat>("mix",      "Mix",        100.0f),
+    std::make_unique<APVTSParameterFloat>("cutoff",   "Cutoff",  20000.0f)
 };
 
 

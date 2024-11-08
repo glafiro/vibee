@@ -16,6 +16,10 @@ VibeeAudioProcessorEditor::VibeeAudioProcessorEditor (VibeeAudioProcessor& p)
     addAndMakeVisible(cutoffKnob);
 
     setSize (PLUGIN_SIZE, PLUGIN_SIZE);
+    setResizable(true, true);
+
+    setResizeLimits(200, 200, 1600, 1600);
+    getConstrainer()->setFixedAspectRatio(1);
 }
 
 VibeeAudioProcessorEditor::~VibeeAudioProcessorEditor()
@@ -25,11 +29,11 @@ VibeeAudioProcessorEditor::~VibeeAudioProcessorEditor()
 void VibeeAudioProcessorEditor::paint (juce::Graphics& g)
 {
     g.drawImage(bgImg, getLocalBounds().toFloat());
+    g.drawImage(shadowImg, getLocalBounds().toFloat());
 }
 
 void VibeeAudioProcessorEditor::paintOverChildren(juce::Graphics& g)
 {
-    g.drawImage(shadowImg, getLocalBounds().toFloat());
 
     vibRateKnob.repaint();
     vibDepthKnob.repaint();
