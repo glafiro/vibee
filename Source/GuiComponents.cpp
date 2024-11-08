@@ -15,6 +15,8 @@ Knob::Knob(IAPVTSParameter* param, int w, int h, AudioProcessorValueTreeState& a
     label.attachToComponent(&slider, false);
     addAndMakeVisible(label);
 
+    setLookAndFeel(KnobLookAndFeel::get());
+
     // Attach GUI component to AudioProcessorValueTreeState
     attachment = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(
         state, param->id.getParamID(), slider
