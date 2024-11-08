@@ -36,6 +36,15 @@ https://github.com/user-attachments/assets/18bd5e10-fcb7-4a2b-ab16-44c1348ff817
 
 ---
 
+## Installation
+
+- **Windows**: unzip and move the folder `Vibee.vst3` into your VST3 folder. On Windows, `that is usually C:\Program Files\Common Files\VST3`
+- **MacOS (AU)**: copy `Vibee.component` into `/Library/Audio/Plug-Ins/Components`
+- **MacOs (VST3)** copy `Vibee.vst3` into `/Library/Audio/Plug-Ins/VST3`
+- **Linux** unzip a move the folder 'Vibee.vst3` into your default VST3 directory
+
+---
+
 ## License
 
 `vibee` is [GPLv3 licensed](https://github.com/glafiro/vibee/blob/main/LICENSE).
