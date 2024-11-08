@@ -12,7 +12,6 @@ public:
     ~VibeeAudioProcessorEditor() override;
 
     void paint (juce::Graphics&) override;
-    void paintOverChildren(juce::Graphics& g) override;
     void resized() override;
 
 private:

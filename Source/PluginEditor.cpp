@@ -32,13 +32,15 @@ void VibeeAudioProcessorEditor::paint (juce::Graphics& g)
 {
     g.drawImage(bgImg, getLocalBounds().toFloat());
     g.drawImage(shadowImg, getLocalBounds().toFloat());
-}
 
-void VibeeAudioProcessorEditor::paintOverChildren(juce::Graphics& g)
-{
+    int textHeight = getHeight() * 0.04f;
+    auto versionTextBounds = Rectangle<int>{
+        0, getBottom() - textHeight,
+        int(getWidth() * 0.2f), textHeight
+    };
 
-    vibRateKnob.repaint();
-    vibDepthKnob.repaint();
+    g.setColour(Colors::cream);
+    g.drawText(ProjectInfo::versionString, versionTextBounds, Justification::left);
 }
 
 void VibeeAudioProcessorEditor::resized()
