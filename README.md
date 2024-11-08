@@ -2,7 +2,7 @@
 
 ![vibee-preview-image](preview.png)
 
-Vibee is a very simple but very versatile open-source vibrato and FM plug-in 🌊 
+Vibee is a very simple but versatile open-source vibrato and FM plug-in 🌊 
 
 Here here are some audio examples:
 
