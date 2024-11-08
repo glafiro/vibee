@@ -5,12 +5,12 @@ Knob::Knob(IAPVTSParameter* param, int w, int h, AudioProcessorValueTreeState& a
     width(w), height(h), state(apvts), sheet(img)
 {
     slider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
-    slider.setTextBoxStyle(Slider::NoTextBox, false, w, h * 0.186);
+    slider.setTextBoxStyle(Slider::NoTextBox, false, 0, 0);
     slider.setBounds(0, 0, w, h);
     addAndMakeVisible(slider);
 
     label.setText(param->displayValue, NotificationType::dontSendNotification);
-    label.setJustificationType(Justification::horizontallyCentred);
+    label.setJustificationType(Justification::centred);
     label.setBorderSize(BorderSize<int>(0));
     label.attachToComponent(&slider, false);
     addAndMakeVisible(label);
@@ -26,7 +26,10 @@ Knob::Knob(IAPVTSParameter* param, int w, int h, AudioProcessorValueTreeState& a
 Knob::~Knob() {}
 
 void Knob::resized() {
-    slider.setBounds(getLocalBounds().withHeight(getLocalBounds().getWidth()));
+    auto bounds = getLocalBounds();
+    auto sliderHeight = bounds.getWidth();
+    slider.setBounds(bounds.withHeight(sliderHeight));
+    label.setBounds(0, sliderHeight * 0.8f, bounds.getWidth(), bounds.getHeight() - sliderHeight);
 }
 
 void Knob::paint(Graphics& g) {
