@@ -1,19 +1,13 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-VibeeAudioProcessor::VibeeAudioProcessor()
-#ifndef JucePlugin_PreferredChannelConfigurations
-     : AudioProcessor (BusesProperties()
-                     #if ! JucePlugin_IsMidiEffect
-                      #if ! JucePlugin_IsSynth
-                       .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
-                      #endif
-                       .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
-                     #endif
-                       ),
+VibeeAudioProcessor::VibeeAudioProcessor() : AudioProcessor (
+    BusesProperties()
+        .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
+        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
+    ),
     apvts(*this, nullptr, "Parameters", createParameterLayout()),
     vibrato()
-#endif
 {
     apvts.state.addListener(this);
 
@@ -185,6 +179,8 @@ AudioProcessorValueTreeState::ParameterLayout VibeeAudioProcessor::createParamet
 {
     AudioProcessorValueTreeState::ParameterLayout layout;
 
+    initializeParameters();
+
     layout.add(std::make_unique <AudioParameterFloat>(
         apvtsParameters[ParameterNames::VIB_RATE]->id,
         apvtsParameters[ParameterNames::VIB_RATE]->displayValue,
@@ -229,4 +225,15 @@ AudioProcessorValueTreeState::ParameterLayout VibeeAudioProcessor::createParamet
 
 
     return layout;
+}
+
+void VibeeAudioProcessor::initializeParameters() {
+    apvtsParameters = {
+        std::make_unique<APVTSParameterFloat>("vibRate",  "Rate",     0.0f),
+        std::make_unique<APVTSParameterFloat>("vibDepth", "Depth",    0.0f),
+        std::make_unique<APVTSParameterFloat>("fmRate",   "FM Rate",  0.0f),
+        std::make_unique<APVTSParameterFloat>("fmDepth",  "FM Depth", 0.0f),
+        std::make_unique<APVTSParameterFloat>("mix",      "Mix",      100.0f),
+        std::make_unique<APVTSParameterFloat>("cutoff",   "Cutoff",   20000.0f)
+    };
 }

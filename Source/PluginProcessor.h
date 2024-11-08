@@ -17,14 +17,6 @@ enum ParameterNames {
     PARAM_COUNT
 };
 
-static std::array<std::unique_ptr<IAPVTSParameter>, ParameterNames::PARAM_COUNT> apvtsParameters{
-    std::make_unique<APVTSParameterFloat>("vibRate",  "Rate",  0.0f),
-    std::make_unique<APVTSParameterFloat>("vibDepth", "Depth", 0.0f),
-    std::make_unique<APVTSParameterFloat>("fmRate",   "FM Rate",    0.0f),
-    std::make_unique<APVTSParameterFloat>("fmDepth",  "FM Depth",   0.0f),
-    std::make_unique<APVTSParameterFloat>("mix",      "Mix",        100.0f),
-    std::make_unique<APVTSParameterFloat>("cutoff",   "Cutoff",  20000.0f)
-};
 
 
 class VibeeAudioProcessor  : 
@@ -63,10 +55,12 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    std::array<std::unique_ptr<IAPVTSParameter>, ParameterNames::PARAM_COUNT> apvtsParameters;
     AudioProcessorValueTreeState     apvts;
 
 private:
     AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    void initializeParameters();
 
     // Manage parameter changes in a thread-safe way
     std::atomic<bool> parametersChanged{ false };

@@ -26,10 +26,10 @@ private:
     Image shadowImg;
     Image knobImg;
 
-    Knob vibRateKnob { apvtsParameters[VIB_RATE].get(),  audioProcessor.apvts, knobImg};
-    Knob vibDepthKnob{ apvtsParameters[VIB_DEPTH].get(), audioProcessor.apvts, knobImg};
-    Knob fmRateKnob  { apvtsParameters[FM_RATE].get(),   audioProcessor.apvts, knobImg};
-    Knob fmDepthKnob { apvtsParameters[FM_DEPTH].get(),  audioProcessor.apvts, knobImg};
-    Knob mixKnob    { apvtsParameters[MIX].get(),        audioProcessor.apvts, knobImg};
-    Knob cutoffKnob  { apvtsParameters[CUTOFF].get(),    audioProcessor.apvts, knobImg};
+    Knob vibRateKnob { audioProcessor.apvtsParameters[VIB_RATE].get(),  audioProcessor.apvts, knobImg };
+    Knob vibDepthKnob{ audioProcessor.apvtsParameters[VIB_DEPTH].get(), audioProcessor.apvts, knobImg };
+    Knob fmRateKnob  { audioProcessor.apvtsParameters[FM_RATE].get(),   audioProcessor.apvts, knobImg };
+    Knob fmDepthKnob { audioProcessor.apvtsParameters[FM_DEPTH].get(),  audioProcessor.apvts, knobImg };
+    Knob mixKnob     { audioProcessor.apvtsParameters[MIX].get(),       audioProcessor.apvts, knobImg };
+    Knob cutoffKnob  { audioProcessor.apvtsParameters[CUTOFF].get(),    audioProcessor.apvts, knobImg};
 };
