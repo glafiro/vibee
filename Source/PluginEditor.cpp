@@ -15,6 +15,8 @@ VibeeAudioProcessorEditor::VibeeAudioProcessorEditor (VibeeAudioProcessor& p)
     addAndMakeVisible(mixKnob);
     addAndMakeVisible(cutoffKnob);
 
+    PLUGIN_SIZE = Desktop::getInstance().getDisplays().getMainDisplay().userArea.getHeight() * 0.5f;
+
     setSize (PLUGIN_SIZE, PLUGIN_SIZE);
     setResizable(true, true);
 

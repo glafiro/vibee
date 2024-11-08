@@ -1,12 +1,11 @@
 #include "GuiComponents.h"
 
 
-Knob::Knob(IAPVTSParameter* param, int w, int h, AudioProcessorValueTreeState& apvts, Image& img) :
-    width(w), height(h), state(apvts), sheet(img)
+Knob::Knob(IAPVTSParameter* param, AudioProcessorValueTreeState& apvts, Image& img) :
+    state(apvts), sheet(img)
 {
     slider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
     slider.setTextBoxStyle(Slider::NoTextBox, false, 0, 0);
-    slider.setBounds(0, 0, w, h);
     addAndMakeVisible(slider);
 
     label.setText(param->displayValue, NotificationType::dontSendNotification);
