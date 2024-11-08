@@ -1,6 +1,6 @@
 # Vibee
 
-<img src="preview.png" width="450">
+<img src="preview.png" width="600">
 
 Vibee is a very simple but versatile open-source vibrato and FM plug-in 🌊 
 
